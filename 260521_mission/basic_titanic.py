@@ -37,7 +37,7 @@ st.divider()
 # metric 3개
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.metric('선택된 승객', len(filtered))
+    st.metric('필터 선택된 승객', len(filtered))
 
 with col2:
     st.metric("생존자", filtered["Survived"].sum())
