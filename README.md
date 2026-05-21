@@ -202,3 +202,76 @@ git push
 </details>
 
 
+<details>
+<summary>2026-05-21 | Streamlit · 인터랙티브 대시보드</summary>
+
+### Streamlit 기초
+- Streamlit 개념 및 실행 구조
+- Python 기반 웹 앱 개발
+- top-to-bottom rerun 모델
+- 데이터 대시보드 프로토타이핑
+
+### 환경 설정
+- uv init
+- uv add streamlit watchdog
+- uv run streamlit run app.py
+- watchdog 활용
+
+### 기본 출력
+- st.title()
+- st.header()
+- st.subheader()
+- st.write()
+- st.markdown()
+- st.text()
+
+### 위젯
+- text_input
+- selectbox
+- slider
+- checkbox
+- multiselect
+- button
+
+### 사이드바
+- st.sidebar
+- 사용자 입력 필터 구성
+- 데이터 조건 필터링
+- 대시보드 레이아웃 분리
+
+### 데이터 출력 및 시각화
+- st.dataframe()
+- st.metric()
+- st.plotly_chart()
+- Plotly 인터랙티브 차트 연동
+
+### 레이아웃 구성
+- st.columns()
+- st.tabs()
+- st.caption()
+- st.divider()
+
+### 캐시 최적화
+- @st.cache_data
+- rerun 성능 최적화
+- .copy() 활용
+- CachedObjectMutationWarning 대응
+
+### 실습
+- Titanic 필터 대시보드 제작
+- IMDB 대시보드 제작
+- 서울 아파트 대시보드 제작
+- Plotly 기반 인터랙티브 차트 구성
+- 사이드바 기반 데이터 필터링
+
+### Git 실습
+```bash
+git add .
+git commit -m "feat: Streamlit 대시보드 실습 완료"
+git push
+````
+
+</details>
+
+
+
