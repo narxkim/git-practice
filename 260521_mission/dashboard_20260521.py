@@ -130,7 +130,7 @@ def imdb_dashboard():
 
 
 st.set_page_config(
-    page_title="통합 데이터 분석 대시보드", page_icon="📊", layout="wide"
+    page_title="Dash Board Challenge", page_icon="📊", layout="wide"
 )
 
 with st.sidebar:
