@@ -142,3 +142,63 @@ git push
 ```
 
 </details>
+
+
+<details>
+<summary>2026-05-20 | EDA · matplotlib · plotly 데이터 시각화</summary>
+
+### EDA (탐색적 데이터 분석)
+- EDA 개념 및 데이터 탐색 흐름
+- 데이터 분포 · 이상치 · 변수 관계 분석
+- Anscombe’s Quartet 사례 분석
+- 시각화 기반 데이터 해석
+
+### 차트 선택 기준
+- 히스토그램 (분포)
+- 막대그래프 (비교)
+- 산점도 (관계)
+- 박스플롯 (이상치)
+- 파이차트 (구성)
+- 꺾은선그래프 (추세)
+
+### matplotlib
+- fig / ax 객체 구조
+- plt.subplots()
+- hist / bar / scatter / boxplot / pie
+- tight_layout()
+- savefig()
+- 한글 폰트 설정
+
+### plotly express
+- px.histogram()
+- px.scatter()
+- px.line()
+- px.bar()
+- hover_name / hover_data
+- marginal 옵션
+- fig.write_html()
+
+### 데이터 전처리
+- pd.to_numeric(errors='coerce')
+- 문자열 숫자 정제
+- astype(str)
+- str.split() / explode()
+- 결측치 및 이상치 처리
+
+### 실습
+- Titanic 데이터 시각화
+- IMDB Top 1000 분석
+- 서울 아파트 실거래 데이터 분석
+- 월별 거래 추이 시각화
+- 구별 평균 거래가격 분석
+
+### Git 실습
+```bash
+git add .
+git commit -m "feat: 시각화 실습 완료"
+git push
+````
+
+</details>
+
+
