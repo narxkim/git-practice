@@ -6,10 +6,11 @@ def load_titanic():
     url = "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
     return pd.read_csv(url)
 
+
 # IMDB 데이터
 @st.cache_data
 def load_imdb():
-    im_df = pd.read_csv("./imdb_top_1000.csv")
+    im_df = pd.read_csv("./260521_mission/imdb_top_1000.csv")
     im_df["Released_Year"] = pd.to_numeric(im_df["Released_Year"], errors="coerce")
     return im_df
 
