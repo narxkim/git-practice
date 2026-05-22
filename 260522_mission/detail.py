@@ -28,22 +28,43 @@ if not filtered.empty:
         )
         st.dataframe(pivot_roi.style.format("{:.2f} x"), use_container_width=True)
 
+    #  타겟 오디언스별 전체 평균 ROI 순위 (트리맵)
     with roi_col2:
-        st.markdown("##### 타겟 오디언스별 전체 평균 ROI 순위")
+        st.markdown("#### **타겟 오디언스별 평균 ROI 비중**")
+
+        # 1. 트리맵용 데이터 그룹화 (평균 ROI 계산)
         audience_roi_df = (
             filtered.groupby("Target_Audience", as_index=False)["ROI"]
             .mean()
             .sort_values(by="ROI", ascending=False)
         )
-        fig_roi = px.bar(
+
+        # 2. Plotly Express 트리맵 생성
+        fig_tree_roi = px.treemap(
             audience_roi_df,
-            x="Target_Audience",
-            y="ROI",
-            labels={"Target_Audience": "타겟 오디언스", "ROI": "평균 ROI (배)"},
-            color="ROI",
-            color_continuous_scale="Teal",
+            path=["Target_Audience"],  # 분할 기준
+            values="ROI",  # 사각형 면적 기준
+            color="ROI",  # 색상 그라데이션 기준
+            color_continuous_scale="Teal",  # 기존의 Teal 컬러 테마 유지
         )
-        fig_roi.update_layout(plot_bgcolor="rgba(0,0,0,0)", coloraxis_showscale=False)
-        st.plotly_chart(fig_roi, use_container_width=True)
+
+        # 3. 사각형 내부 텍스트 스타일 커스텀
+        # ROI 수치를 '2.45 x' 형태로 명확하게 표시
+        fig_tree_roi.update_traces(
+            texttemplate="<b>%{label}</b><br>평균 %{value:.2f} x",
+            textposition="middle center",  # 에러 방지 및 중앙 정렬
+        )
+
+        # 4. 레이아웃 최적화
+        fig_tree_roi.update_layout(
+            coloraxis_showscale=False,  # 우측 색상바 제거
+            margin=dict(l=10, r=10, t=10, b=10),
+        )
+
+        # 5. 차트 출력
+        st.plotly_chart(fig_tree_roi, use_container_width=True)
+
+    st.divider()
+
 else:
     st.warning("선택한 필터 조건에 맞는 데이터가 없습니다.")

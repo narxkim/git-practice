@@ -65,14 +65,14 @@ if not filtered.empty:
             path=["Target_Audience"],  # 분할할 그룹 기준
             values="Clicks",  # 사각형 면적 결정 기준
             color="Clicks",  # 그라데이션 색상 기준
-            color_continuous_scale="Purples",
+            color_continuous_scale="Blues",
         )
 
         # 4. textposition을 'middle center'로 수정하여 에러 원천 차단
         fig_tree.update_traces(
             texttemplate="<b>%{label}</b><br>%{value:,.0f}회<br>(%{customdata[0]:.1f}%)",
             customdata=audience_clicks_mk_df[["Percentage"]],
-            textposition="middle center",  # 👈 'inside' 대신 트리맵 규격에 맞는 고정값 사용
+            textposition="middle center",  #'inside' 대신 트리맵 규격에 맞는 고정값 사용
         )
 
         # 5. 불필요한 레이아웃 제거 및 마진 조정
