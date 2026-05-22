@@ -42,6 +42,7 @@ if not filtered.empty:
         )
         st.dataframe(pivot_clicks.style.format("{:,.0f}"), use_container_width=True)
 
+    # 💡 에러 보정 및 레이아웃 최적화 완료된 트리맵 영역
     with chart_col2:
         st.markdown("#### **타겟 오디언스별 총 클릭 수 비중**")
 
@@ -64,18 +65,17 @@ if not filtered.empty:
             path=["Target_Audience"],  # 분할할 그룹 기준
             values="Clicks",  # 사각형 면적 결정 기준
             color="Clicks",  # 그라데이션 색상 기준
-            color_continuous_scale="Purples",  # 기존 대시보드와 톤앤매너 동기화
+            color_continuous_scale="Purples",
         )
 
-        # 4. 사각형 내부 텍스트 스타일 커스텀 (HTML 태그 활용으로 가독성 극대화)
+        # 4. textposition을 'middle center'로 수정하여 에러 원천 차단
         fig_tree.update_traces(
             texttemplate="<b>%{label}</b><br>%{value:,.0f}회<br>(%{customdata[0]:.1f}%)",
             customdata=audience_clicks_mk_df[["Percentage"]],
-            textposition="inside",
-            labels={"Clicks": "총 클릭 수"},
+            textposition="middle center",  # 👈 'inside' 대신 트리맵 규격에 맞는 고정값 사용
         )
 
-        # 5. 불필요한 레이아웃(여백, 색상 바 인터페이스) 제거 및 최적화
+        # 5. 불필요한 레이아웃 제거 및 마진 조정
         fig_tree.update_layout(
             coloraxis_showscale=False, margin=dict(l=10, r=10, t=10, b=10)
         )
