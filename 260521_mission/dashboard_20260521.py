@@ -1,5 +1,9 @@
 import streamlit as st ,pandas as pd, plotly.express as px
 
+
+st.set_page_config(page_title="Dash Board Challenge", page_icon="📊", layout="wide")
+
+
 # 타이타닉 데이터
 @st.cache_data
 def load_titanic():
@@ -129,10 +133,6 @@ def imdb_dashboard():
         )
         st.plotly_chart(fig, width='stretch')
 
-
-st.set_page_config(
-    page_title="Dash Board Challenge", page_icon="📊", layout="wide"
-)
 
 with st.sidebar:
     st.title("데이터셋 선택")
