@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 
 # 1. 페이지 레이아웃 넓게
 st.set_page_config(layout="wide")
@@ -7,8 +8,12 @@ st.set_page_config(layout="wide")
 
 @st.cache_data
 def load_marketing():
+    # 💡 현재 app.py 파일이 있는 위치를 기준으로 절대 경로를 생성합니다.
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, "data", "marketing_campaign_dataset.csv")
+
     # marketing 데이터 불러오기
-    df_mk = pd.read_csv("./data/marketing_campaign_dataset.csv")
+    df_mk = pd.read_csv(file_path)
 
     # 전처리 -> $ 및 쉼표 제거 후 실수 타입으로 변환
     df_mk["Acquisition_Cost"] = (
