@@ -8,7 +8,7 @@ st.set_page_config(layout="wide")
 
 @st.cache_data
 def load_marketing():
-    # 💡 현재 app.py 파일이 있는 위치를 기준으로 절대 경로를 생성합니다.
+    # 현재 app.py 파일이 있는 위치를 기준으로 절대 경로를 생성
     current_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(current_dir, "data", "marketing_campaign_dataset.csv")
 
