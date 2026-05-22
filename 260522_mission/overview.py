@@ -43,21 +43,44 @@ if not filtered.empty:
         st.dataframe(pivot_clicks.style.format("{:,.0f}"), use_container_width=True)
 
     with chart_col2:
-        st.markdown("#### **타겟 오디언스별 총 클릭 수**")
+        st.markdown("#### **타겟 오디언스별 총 클릭 수 비중**")
+
+        # 1. 트리맵용 데이터 그룹화 수집
         audience_clicks_mk_df = (
             filtered.groupby("Target_Audience", as_index=False)["Clicks"]
             .sum()
             .sort_values(by="Clicks", ascending=False)
         )
-        fig = px.bar(
+
+        # 2. 사각형 내부에 표기할 각 그룹별 '전체 대비 비율(%)' 계산
+        total_clicks_sum = audience_clicks_mk_df["Clicks"].sum()
+        audience_clicks_mk_df["Percentage"] = (
+            audience_clicks_mk_df["Clicks"] / total_clicks_sum
+        ) * 100
+
+        # 3. Plotly Express 트리맵 생성
+        fig_tree = px.treemap(
             audience_clicks_mk_df,
-            x="Target_Audience",
-            y="Clicks",
-            labels={"Target_Audience": "타겟 오디언스", "Clicks": "총 클릭 수"},
-            color="Clicks",
-            color_continuous_scale="Purples",
+            path=["Target_Audience"],  # 분할할 그룹 기준
+            values="Clicks",  # 사각형 면적 결정 기준
+            color="Clicks",  # 그라데이션 색상 기준
+            color_continuous_scale="Purples",  # 기존 대시보드와 톤앤매너 동기화
         )
-        fig.update_layout(plot_bgcolor="rgba(0,0,0,0)", coloraxis_showscale=False)
-        st.plotly_chart(fig, use_container_width=True)
+
+        # 4. 사각형 내부 텍스트 스타일 커스텀 (HTML 태그 활용으로 가독성 극대화)
+        fig_tree.update_traces(
+            texttemplate="<b>%{label}</b><br>%{value:,.0f}회<br>(%{customdata[0]:.1f}%)",
+            customdata=audience_clicks_mk_df[["Percentage"]],
+            textposition="inside",
+            labels={"Clicks": "총 클릭 수"},
+        )
+
+        # 5. 불필요한 레이아웃(여백, 색상 바 인터페이스) 제거 및 최적화
+        fig_tree.update_layout(
+            coloraxis_showscale=False, margin=dict(l=10, r=10, t=10, b=10)
+        )
+
+        # 6. 스트림릿 화면에 차트 출력
+        st.plotly_chart(fig_tree, use_container_width=True)
 else:
     st.warning("선택한 필터 조건에 맞는 데이터가 없습니다.")
