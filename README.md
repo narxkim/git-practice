@@ -274,4 +274,116 @@ git push
 </details>
 
 
+<details>
+<summary>2026-05-26 | 머신러닝 개요 · 지도학습 파이프라인 · k-NN</summary>
+
+### 머신러닝 개요
+
+* AI · ML · DL 관계 이해
+* 머신러닝과 전통 프로그래밍 차이
+* 데이터 기반 학습 개념
+* 패턴 학습 기반 예측 구조
+
+### 머신러닝 학습 유형
+
+* 지도학습 (Supervised Learning)
+* 비지도학습 (Unsupervised Learning)
+* 강화학습 (Reinforcement Learning)
+
+### 지도학습
+
+* 분류(Classification)
+* 회귀(Regression)
+* Feature / Label 개념
+* Sample 개념
+* 입력(X)과 정답(y) 구조 이해
+
+### 비지도학습
+
+* Clustering
+* PCA(차원 축소)
+* 이상 탐지(Anomaly Detection)
+
+### 지도학습 파이프라인
+
+* 데이터 수집
+* 특성 선택
+* train / test 분리
+* 모델 학습
+* 예측
+* 평가
+
+### train_test_split
+
+* train / test 데이터 분리 이유
+* 일반화(Generalization)
+* 데이터 누수(Data Leakage)
+* random_state
+* stratify
+
+### k-NN 알고리즘
+
+* 거리 기반 분류 알고리즘
+* KNeighborsClassifier
+* k 값에 따른 성능 변화
+* 다수결 기반 예측
+* 최근접 이웃 개념
+
+### scikit-learn 기본 패턴
+
+```python
+from sklearn.neighbors import KNeighborsClassifier
+
+kn = KNeighborsClassifier()
+
+kn.fit(X_train, y_train)
+
+kn.predict(X_new)
+
+kn.score(X_test, y_test)
+```
+
+### 데이터 시각화
+
+* matplotlib scatter plot
+* 도미 · 빙어 산점도 시각화
+* 클래스 분포 시각화
+
+### 실습
+
+* 생선 데이터 분류
+* 도미 / 빙어 분류 모델 구현
+* train_test_split 적용
+* k 값 비교 실습
+* score 1.0 문제 분석
+* 타이타닉 문제 정의 워크숍
+
+### 주요 개념 정리
+
+* Feature
+* Label
+* Training Set
+* Test Set
+* Generalization
+* Classification
+* Regression
+
+### 오류 해결
+
+* ModuleNotFoundError
+* ValueError
+* list index out of range
+* random_state 재현성 문제
+* matplotlib 그래프 출력 문제
+
+### Git 실습
+
+```bash
+git add .
+git commit -m "feat: 머신러닝 기초 및 k-NN 실습 완료"
+git push
+```
+
+</details>
+
 
