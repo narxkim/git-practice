@@ -387,3 +387,399 @@ git push
 </details>
 
 
+
+<details>
+<summary>2026-05-27 | 회귀 알고리즘 · 특성 공학 · Ridge · Lasso</summary>
+
+### StandardScaler
+
+* 특성 스케일 차이 문제
+* 유클리드 거리 왜곡
+* 표준화(Standardization)
+* z-score 공식
+* 평균 0 / 표준편차 1 변환
+* StandardScaler
+* MinMaxScaler 비교
+
+### Data Leakage
+
+* 데이터 누설(Data Leakage)
+* train 데이터 기준 스케일링
+* fit / transform 차이
+* 테스트 데이터 fit 금지
+* 모델 평가 신뢰성 문제
+
+### k-NN 회귀
+
+* KNeighborsRegressor
+* 분류와 회귀 차이
+* 연속값 예측
+* 이웃 평균 기반 예측
+* 외삽(Extrapolation) 한계
+
+### 회귀 평가 지표
+
+* R² (결정계수)
+* MAE (Mean Absolute Error)
+* 평균 절대 오차
+* 회귀 모델 성능 평가
+
+### 선형 회귀
+
+* LinearRegression
+* coef_
+* intercept_
+* 직선 방정식
+* 가중치(w)
+* 편향(b)
+* 외삽 가능성
+
+### 손실 함수
+
+* MSE (Mean Squared Error)
+* 평균 제곱 오차
+* 오차 제곱합 계산
+* 손실 최소화 개념
+
+### 경사 하강법
+
+* Gradient Descent
+* 비용 함수 최소화
+* 학습률(alpha)
+* 기울기 기반 최적화
+* SGD 개념 연결
+
+### 다항 회귀
+
+* PolynomialFeatures
+* degree 개념
+* 곡선 회귀
+* 특성 공학(Feature Engineering)
+* 다중 회귀
+* 교차항 생성
+
+### 과적합 · 과소적합
+
+* Overfitting
+* Underfitting
+* train/test R² 비교
+* 학습 곡선 해석
+* bias / variance 개념
+
+### Ridge · Lasso
+
+* 규제(Regularization)
+* Ridge (L2 규제)
+* Lasso (L1 규제)
+* alpha 하이퍼파라미터
+* 계수 축소
+* 특성 선택 효과
+
+### 하이퍼파라미터
+
+* alpha
+* n_neighbors
+* degree
+* Parameter vs Hyperparameter 차이
+
+### 데이터 전처리
+
+```python id="8p4kzs"
+from sklearn.preprocessing import StandardScaler
+
+ss = StandardScaler()
+
+train_scaled = ss.fit_transform(train_input)
+
+test_scaled = ss.transform(test_input)
+```
+
+### 회귀 모델 패턴
+
+```python id="jv1mqo"
+from sklearn.linear_model import LinearRegression
+
+lr = LinearRegression()
+
+lr.fit(X_train, y_train)
+
+lr.predict(X_test)
+
+lr.score(X_test, y_test)
+```
+
+### 다항 특성 생성
+
+```python id="6weq9l"
+from sklearn.preprocessing import PolynomialFeatures
+
+poly = PolynomialFeatures(degree=2, include_bias=False)
+
+train_poly = poly.fit_transform(train_input)
+
+test_poly = poly.transform(test_input)
+```
+
+### Ridge 실습
+
+```python id="v8k3ma"
+from sklearn.linear_model import Ridge
+
+ridge = Ridge(alpha=0.1)
+
+ridge.fit(train_scaled, train_target)
+
+ridge.score(test_scaled, test_target)
+```
+
+### Lasso 실습
+
+```python id="4bq2nx"
+from sklearn.linear_model import Lasso
+
+lasso = Lasso(alpha=10)
+
+lasso.fit(train_scaled, train_target)
+
+lasso.score(test_scaled, test_target)
+```
+
+### 실습
+
+* 농어 무게 예측
+* k-NN 회귀 실습
+* 선형 회귀 실습
+* PolynomialFeatures 실습
+* degree 비교 실습
+* Ridge alpha 탐색
+* Lasso alpha 탐색
+* 과적합 직접 실험
+* train/test R² 비교 분석
+
+### 주요 개념 정리
+
+* Regression
+* R²
+* MSE
+* Gradient Descent
+* Learning Rate
+* Overfitting
+* Underfitting
+* Regularization
+* Ridge
+* Lasso
+* Hyperparameter
+* Feature Engineering
+* Data Leakage
+
+### Git 실습
+
+```bash id="1k4xpw"
+git add .
+git commit -m "feat: 회귀 알고리즘 및 규제 모델 실습 완료"
+git push
+```
+
+</details>
+
+
+<details>
+<summary>2026-05-28 | 분류 알고리즘 · 평가지표 · bias/variance 진단</summary>
+
+### LogisticRegression
+
+* LogisticRegression
+* 확률 기반 분류
+* 선형 결합(z)
+* Sigmoid 함수
+* Softmax 함수
+* 이진 분류(Binary Classification)
+* 다중 분류(Multi Classification)
+
+### Sigmoid 함수
+
+* 시그모이드 함수
+* 확률 변환
+* decision_function
+* predict_proba
+* expit
+* 결정 경계(Decision Boundary)
+
+### Softmax
+
+* 다중 클래스 확률 분포
+* 클래스별 확률 계산
+* Softmax 기반 분류
+* 클래스 확률 합 = 1
+
+### 분류 손실 함수
+
+* Cross-Entropy
+* Binary Cross-Entropy
+* MSE와 분류 문제 차이
+* 로그 손실(Log Loss)
+
+### 분류 평가 지표
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+* ROC Curve
+* AUC
+
+### Confusion Matrix
+
+* TP (True Positive)
+* TN (True Negative)
+* FP (False Positive)
+* FN (False Negative)
+* Type I Error
+* Type II Error
+
+### Precision · Recall · F1
+
+* Precision / Recall Trade-off
+* Threshold 개념
+* 도메인별 평가 지표 선택
+* 조화평균(F1)
+
+### ROC-AUC
+
+* ROC Curve
+* TPR
+* FPR
+* AUC 해석
+* 임계값 기반 평가
+
+### bias / variance 진단
+
+* High Bias
+* High Variance
+* Underfitting
+* Overfitting
+* train/test score 비교
+* 일반화 성능 진단
+
+### SGDClassifier
+
+* 확률적 경사 하강법(SGD)
+* partial_fit
+* epoch 개념
+* 조기 종료(Early Stopping)
+* 배치 GD vs SGD 비교
+
+### 데이터 전처리
+
+* train_test_split
+* StandardScaler
+* stratify
+* One-Hot Encoding
+* pd.get_dummies()
+
+### LogisticRegression 실습
+
+```python id="xk8m1v"
+from sklearn.linear_model import LogisticRegression
+
+lr = LogisticRegression()
+
+lr.fit(X_train, y_train)
+
+lr.predict(X_test)
+
+lr.predict_proba(X_test)
+```
+
+### Sigmoid 확인
+
+```python id="9qp2zt"
+from scipy.special import expit
+
+decisions = lr.decision_function(X_test)
+
+proba = expit(decisions)
+```
+
+### Confusion Matrix · 평가 지표
+
+```python id="4hvm7r"
+from sklearn.metrics import (
+    confusion_matrix,
+    classification_report,
+    roc_auc_score
+)
+
+print(confusion_matrix(y_test, y_pred))
+
+print(classification_report(y_test, y_pred))
+
+print(roc_auc_score(y_test, y_prob))
+```
+
+### SGDClassifier 실습
+
+```python id="r8k1dc"
+from sklearn.linear_model import SGDClassifier
+
+sc = SGDClassifier(
+    loss='log_loss',
+    random_state=42
+)
+
+sc.partial_fit(
+    train_scaled,
+    train_target,
+    classes=classes
+)
+```
+
+### 실습
+
+* 7종 생선 다중 분류
+* LogisticRegression 실습
+* Sigmoid 직접 확인
+* Softmax 확률 출력
+* Titanic 생존 분류
+* Confusion Matrix 분석
+* ROC-AUC 계산
+* SGD epoch 그래프 분석
+* Early Stopping 실습
+
+### 주요 개념 정리
+
+* Logistic Regression
+* Sigmoid
+* Softmax
+* Cross-Entropy
+* Decision Boundary
+* Confusion Matrix
+* Precision
+* Recall
+* F1 Score
+* ROC-AUC
+* Threshold
+* SGD
+* Epoch
+* Early Stopping
+* Bias / Variance
+
+### 오개념 정리
+
+* LogisticRegression은 회귀 모델이 아니라 분류 모델
+* Accuracy만으로 모델 평가 불가
+* Precision과 Recall은 Trade-off 관계
+* fit() 반복은 epoch가 아님
+* partial_fit() 기반 학습 필요
+
+### Git 실습
+
+```bash id="8bqv2j"
+git add .
+git commit -m "feat: 분류 알고리즘 및 평가지표 실습 완료"
+git push
+```
+
+</details>
+
+
